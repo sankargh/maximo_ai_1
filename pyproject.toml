@@ -1,0 +1,12 @@
+[project]
+name = "maximo-ai"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "openai>=1.30.0",
+    "gradio>=4.0.0",
+    "sqlparse>=0.4.4",
+    "openai-agents>=0.15.0",
+]
