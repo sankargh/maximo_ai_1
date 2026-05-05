@@ -9,6 +9,11 @@ Example usage:
 
 SCHEMA_NAMES = {"Asset", "Locations"}
 
+OS_LIST = {"MXASSET", "MXLOCATIONS"}
+
+OS_SCHEMA_DICT = {"Asset": "MXASSET", "Locations": "MXLOCATIONS"}
+
+
 SCHEMA = {
     "Asset": {
         "Assetnum",
