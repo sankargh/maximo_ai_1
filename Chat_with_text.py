@@ -9,7 +9,8 @@ from sqlparse.sql import Identifier, IdentifierList, Where
 from pydantic import BaseModel
 from sqlparse.tokens import Keyword
 # from Schema import SCHEMA, SCHEMA_NAMES,OS_SCHEMA_DICT,OS_LIST
-from tools import extract_select_clause,extract_where_clause, get_oslc_parameters
+# from tools import extract_select_clause,extract_where_clause, get_oslc_parameters, *
+from tools import *
 
 load_dotenv(override=True)
 
@@ -76,7 +77,8 @@ async def chat(message,history):
             maximo_data=maximo_api.query_maximo(os_name,fixed_where,fixed_select)
 
             if maximo_data:
-                return str(maximo_data)
+                final_response=format_json_as_text(maximo_data)
+                return str(final_response)
             else:
                 return "No data found for the given query."
             

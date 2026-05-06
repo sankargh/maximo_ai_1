@@ -6,9 +6,9 @@ import gradio as gr
 from agents import Agent, Runner,trace, SQLiteSession
 import maximo_api
 from pydantic import BaseModel
-from Schema import OS_SCHEMA_DICT
+from Schema import OS_SCHEMA_DICT,User_Options
 # , DML
-from tools import get_schema,extract_select_clause,extract_where_clause,fix_where_clause
+from tools import get_schema,extract_select_clause,extract_where_clause,fix_where_clause, format_json_as_text
 
 load_dotenv(override=True)
 
@@ -123,7 +123,8 @@ async def run_sql_agent(user_query,os_name,schema_name):
             where_clause=fix_where_clause(where_clause)
             maximo_data=maximo_api.query_maximo(os_name,where_clause,select_clause)
             if maximo_data:
-                return str(maximo_data)
+                final_response=format_json_as_text(maximo_data)
+                return str(final_response)
             else:
                 return "No data found for the given query."
 
@@ -150,7 +151,8 @@ with gr.Blocks(title=" Maximo Agentic Query") as demo:
     gr.Markdown("## 🤖 Maximo Agentic Query")
 
     option_selector = gr.Radio(
-        choices=["Asset", "Locations", "General"],
+        # choices=["Asset", "Locations", "General"],
+        choices=User_Options,
         label="Select Object Type",
         value="Asset"
     )

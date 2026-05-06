@@ -7,11 +7,16 @@ Example usage:
 """
 
 
-SCHEMA_NAMES = {"Asset", "Locations"}
+SCHEMA_NAMES = {"Asset", "Locations" ,"Workorder"}
 
-OS_LIST = {"MXASSET", "MXLOCATIONS"}
+User_Options = sorted(SCHEMA_NAMES)
+User_Options.append("General")
 
-OS_SCHEMA_DICT = {"Asset": "MXASSET", "Locations": "MXLOCATIONS"}
+print(str(User_Options))
+
+OS_LIST = {"MXASSET", "MXLOCATIONS","MXAPIWODETAIL"}
+
+OS_SCHEMA_DICT = {"Asset": "MXASSET", "Locations": "MXLOCATIONS","Workorder":"MXAPIWODETAIL"}
 
 
 SCHEMA = {
@@ -25,19 +30,27 @@ SCHEMA = {
         "ChangeDate",
     },
     "Locations": {
+        (
         "Location",
         "Description",
         "Status",
         "SiteID",
+        )
+   
+   
+    },
+    "Workorder":{
+        "WONum","Description","Worktype","Status","Changedate",
+        "Reportdate","WOPriority"
     }
 }
 
-asset_columns = {
-        "Assetnum",
-        "Description",
-        "AssetType",
-        "Status",
-        "Location",
-        "SiteID",
-        "ChangeDate"
-        }
+# asset_columns = {
+#         "Assetnum",
+#         "Description",
+#         "AssetType",
+#         "Status",
+#         "Location",
+#         "SiteID",
+#         "ChangeDate"
+#         }

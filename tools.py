@@ -31,6 +31,20 @@ def validate_select_clause(select_clause: str, valid_columns: set) -> tuple[bool
     
     return len(invalid) == 0, invalid
 
+"-- Format Json to a Field: Value text --"
+
+def format_json_as_text(json_input):
+    # If the input is already a dict, iterate; if string, parse first
+    if isinstance(json_input, dict):
+        data = json_input
+    else:
+        import json
+        data = json.loads(json_input)
+    
+    # Create the "Field: Value" format
+    return "\n".join([f"{key.title()} : {value}" for key, value in data.items()])
+
+
 # ============================================================
 # TOOL 1 — SELECT CLAUSE EXTRACTOR
 # ============================================================
