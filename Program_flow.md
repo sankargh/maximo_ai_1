@@ -56,7 +56,8 @@ Based on the code files provided, here's the program flow:
 
 | Component | Purpose |
 |-----------|---------|
-| **Chat_with_options.py** | Main UI and routing logic |
+| **chat_with_options.py** | Main UI with object selection and routing logic |
+| **chat_with_text.py** | Text-based UI interface for direct natural language queries |
 | **tools.py** | Tool functions for SQL extraction and clause fixing |
 | **Schema.py** | Database schema definitions and OS mappings |
 | **maximo_api.py** | External API calls to Maximo instance |
