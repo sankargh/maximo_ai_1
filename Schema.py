@@ -7,7 +7,17 @@ Example usage:
 """
 
 
-SCHEMA_NAMES = {"Asset", "Locations"}
+SCHEMA_NAMES = {"Asset", "Locations" ,"Workorder"}
+
+User_Options = sorted(SCHEMA_NAMES)
+User_Options.append("General")
+
+print(str(User_Options))
+
+OS_LIST = {"MXASSET", "MXLOCATIONS","MXAPIWODETAIL"}
+
+OS_SCHEMA_DICT = {"Asset": "MXASSET", "Locations": "MXLOCATIONS","Workorder":"MXAPIWODETAIL"}
+
 
 SCHEMA = {
     "Asset": {
@@ -20,19 +30,27 @@ SCHEMA = {
         "ChangeDate",
     },
     "Locations": {
+        (
         "Location",
         "Description",
         "Status",
         "SiteID",
+        )
+   
+   
+    },
+    "Workorder":{
+        "WONum","Description","Worktype","Status","Changedate",
+        "Reportdate","WOPriority"
     }
 }
 
-asset_columns = {
-        "Assetnum",
-        "Description",
-        "AssetType",
-        "Status",
-        "Location",
-        "SiteID",
-        "ChangeDate"
-        }
+# asset_columns = {
+#         "Assetnum",
+#         "Description",
+#         "AssetType",
+#         "Status",
+#         "Location",
+#         "SiteID",
+#         "ChangeDate"
+#         }

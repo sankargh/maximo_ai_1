@@ -1,27 +1,26 @@
 import requests
 import json
 import os
-from Schema import SCHEMA
 from dotenv import load_dotenv
 
 load_dotenv(override=True)
 
-DEV_URL= os.getenv("DEV_URL")
-DEV_ISR_API_KEY=os.getenv("DEV_ISR_API_KEY")
+MAXIMO_URL= os.getenv("MAXIMO_URL")
+MAXIMO_API_KEY = os.getenv("MAXIMO_API_KEY")
 
-os_name="mxasset"
+os_name="MXASSET"
 where_clause=os_name+"?"
 where_clause="status=\"OPERATING\" and location.status=\"OPERATING\" and assetnum=\"10001\""
 oslc_select="&oslc.select=assetnum,description,assettype,status,changedate&lean=1"
-url = DEV_URL+"/"+os_name+"?"+"oslc.where="+where_clause+oslc_select
+url = MAXIMO_URL+"/"+os_name+"?"+"oslc.where="+where_clause+oslc_select
 
 payload = {}
 headers = {
-  'apikey': DEV_ISR_API_KEY
+  'apikey': MAXIMO_API_KEY
 }
 
-def query_maximo(where_clause,select_clause):
-  url = DEV_URL+"/"+os_name+"?"+"oslc.where="+where_clause+"&oslc.select="+select_clause+"&lean=1"
+def query_maximo(os_name,where_clause,select_clause):
+  url = MAXIMO_URL+"/"+os_name+"?"+"oslc.where="+where_clause+"&oslc.select="+select_clause+"&lean=1"
   response = requests.request("GET", url, headers=headers, data=payload)
   data=json.loads(response.text)
   if "member" in data and len(data["member"]) > 0:
@@ -40,4 +39,4 @@ def query_maximo(where_clause,select_clause):
 
 if __name__=="__main__":
   select_clause="Assetnum, Description, AssetType, Status"
-  query_maximo(where_clause,select_clause )
+  query_maximo(os_name,where_clause,select_clause)

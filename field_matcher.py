@@ -1,7 +1,6 @@
 from difflib import SequenceMatcher
 import re
 
-
 def match_fields(source_list: list, target_list: list) -> list:
     """
     Compare target_list against source_list and return the best-matching
