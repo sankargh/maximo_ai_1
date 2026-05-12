@@ -11,7 +11,7 @@ Intent Check (Validate query intent)
 SQL Generation (Schema-Aware analysis)
     ↓
 Extract SELECT / WHERE clauses
-    ↓
+    ���
 Fix Column Names (Validate against schema)
     ↓
 Maximo OSLC API Call
@@ -25,15 +25,39 @@ Parse & Return Results
 3. **Column Validation** - Maps user-referenced columns to actual Maximo table columns
 4. **API Execution** - Submits OSLC-compliant query to Maximo
 5. **Result Parsing** - Structures and returns data to the user
-   
+
 ## Requirements
 - **Python 3.9+**
+- **uv** (Python package manager)
 - Active Maximo instance with OSLC API enabled
 - OpenAI API key (`OPENAI_API_KEY`)
 - Maximo credentials and connection details
-     - Create '.env' file with below variables
-       - MAXIMO_URL
-       - MAXIMO_API_KEY
+
+## Setup
+
+1. **Create `.env` file** with the following variables:
+```
+MAXIMO_URL=<your_maximo_url>
+MAXIMO_API_KEY=<your_maximo_api_key>
+OPENAI_API_KEY=<your_openai_api_key>
+```
+
+## Quick Start
+
+### Sync Dependencies
+```bash
+uv sync
+```
+
+### Run with Chat Interface (Dropdown Options)
+```bash
+uv run chat_with_options.py
+```
+
+### Run with Chat Interface (Text Input)
+```bash
+uv run chat_with_text.py
+```
 
 ## Limitations
 - **Read-Only Queries** - Supports SELECT operations only; no INSERT, UPDATE, or DELETE
