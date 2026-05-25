@@ -37,6 +37,7 @@ Parse & Return Results
 
 1. **Create `.env` file** with the following variables:
 ```
+MAXIMO_HOST=<your_maximo_host_name>
 MAXIMO_URL=<your_maximo_url>
 MAXIMO_API_KEY=<your_maximo_api_key>
 OPENAI_API_KEY=<your_openai_api_key>
