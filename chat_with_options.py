@@ -40,6 +40,7 @@ agent_instructions = (
     "Then, Follow the steps to generate A) SQL Query, B) Select Clause and C) Where Clause. "
     "Steps to follow: "
     "1. Generate SQL query for the given question and schema "
+    "1a. Do Not make alias such as 'assettype as type or description as desc etc."
     "2. Use the {extract_select_clause} tool to extract Select clause from the generated SQL query. "
     "3. Use the {extract_where_clause} tool to extract Where clause from the generated SQL query. "
     "4. Ensure that the generated SQL query strictly adheres to the provided schema, "

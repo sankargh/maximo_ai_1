@@ -2,6 +2,7 @@
 from dotenv import load_dotenv
 from agents import function_tool
 import sqlparse
+import re
 from sqlparse.sql import Identifier,Where
 from sqlparse.tokens import Keyword
 from Schema import SCHEMA, OS_SCHEMA_DICT, SCHEMA_NAMES
@@ -114,6 +115,26 @@ def fix_where_clause(where_clause: str) -> tuple[str, str]:
         fixed_where=fixed_where[:-1]
     print("WHERE -> ", fixed_where)
     return fixed_where
+
+def format_where_clause(where: str) -> str:
+    # Rule : Collapse extra spaces
+    result = re.sub(r"\s{2,}", " ", where).strip()
+
+    # Rules for in clauses:
+    # Handles both in (...) and in ((...)) — strips ALL wrapping parens
+    def format_in_clause(match):
+        inner = match.group(1)
+        values = [s.strip().replace("'", "").replace('"', "") for s in inner.split(",")]
+        values = [v for v in values if v]  # drop empty
+        formatted = ",".join(f'"{v}"' for v in values)
+        return f"in [{formatted}]"
+
+    result = re.sub(r"\bin\s*\(+([^)]*?)\)+", format_in_clause, result, flags=re.IGNORECASE)
+
+    # Rule : Normalize remaining quoted values to double quotes
+    result = re.sub(r"(['\"])(.*?)\1", r'"\2"', result)
+
+    return result   
 
 def get_oslc_parameters(data_dict: dict) -> tuple[str, str]:
 

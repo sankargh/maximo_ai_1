@@ -8,8 +8,8 @@ import sqlparse
 from sqlparse.sql import Identifier, IdentifierList, Where
 from pydantic import BaseModel
 from sqlparse.tokens import Keyword
-# from Schema import SCHEMA, SCHEMA_NAMES,OS_SCHEMA_DICT,OS_LIST
-# from tools import extract_select_clause,extract_where_clause, get_oslc_parameters, *
+from Schema import SCHEMA, SCHEMA_NAMES,OS_SCHEMA_DICT,OS_LIST
+from tools import extract_select_clause,extract_where_clause, get_oslc_parameters
 from tools import *
 
 load_dotenv(override=True)
@@ -33,6 +33,7 @@ agent_instructions = (
     "Follow the steps to generate 1) SQL Query, 2) Select Clause and 3) Where Clause. "
     "Steps to follow: "
     "1. Generate SQL query for the given question and schema. "
+    "1a. Do Not make alias such as 'assettype as type or description as desc etc."    
     "2. Use the {extract_select_clause} tool to extract Select clause from the generated SQL query. "
     "3. Use the {extract_where_clause} tool to extract Where clause from the generated SQL query. "
     "4. Ensure that the generated SQL query strictly adheres to the provided schema, "

@@ -2,6 +2,10 @@ import requests
 import json
 import os
 from dotenv import load_dotenv
+from get_profile import getProfile
+from Schema import  SCHEMA, SCHEMA_OS_DICT
+from field_matcher import fix_clause
+from tools import format_where_clause
 
 load_dotenv(override=True)
 
@@ -20,6 +24,11 @@ headers = {
 }
 
 def query_maximo(os_name,where_clause,select_clause):
+  mboName=SCHEMA_OS_DICT[os_name]
+  profileData = getProfile(mboName)
+  siteWhereClause = " and siteid in ("+str(profileData["siteWhereClause"])+")"
+  where_clause = format_where_clause(where_clause+siteWhereClause)
+  print("Where Clause appended with Sites : "+where_clause)
   url = MAXIMO_URL+"/"+os_name+"?"+"oslc.where="+where_clause+"&oslc.select="+select_clause+"&lean=1"
   response = requests.request("GET", url, headers=headers, data=payload)
   data=json.loads(response.text)

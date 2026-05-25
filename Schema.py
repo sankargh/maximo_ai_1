@@ -17,7 +17,7 @@ print(str(User_Options))
 OS_LIST = {"MXASSET", "MXLOCATIONS","MXAPIWODETAIL"}
 
 OS_SCHEMA_DICT = {"Asset": "MXASSET", "Locations": "MXLOCATIONS","Workorder":"MXAPIWODETAIL"}
-
+SCHEMA_OS_DICT = {'MXASSET': 'Asset', 'MXLOCATIONS': 'Locations', 'MXAPIWODETAIL': 'Workorder'}
 
 SCHEMA = {
     "Asset": {
